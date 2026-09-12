@@ -4,6 +4,8 @@ require("dotenv").config();
 
 const connectDB = require("./config/db");
 
+const propertyRoutes = require("./routes/propertyRoutes");
+
 
 const app = express();
 
@@ -14,6 +16,8 @@ connectDB();
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+app.use("/api/properties", propertyRoutes);
 
 
 // Test route

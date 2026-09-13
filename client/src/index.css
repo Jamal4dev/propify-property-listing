@@ -1,17 +1,1909 @@
+/* =========================
+   Global Reset
+========================= */
+
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
 }
+
+
+
+
+
+:root {
+
+
+    /* Colors */
+
+
+    --primary: #2563eb;
+
+    --primary-hover: #1d4ed8;
+
+
+    --success: #16a34a;
+
+    --danger: #dc2626;
+
+    --warning: #f59e0b;
+
+
+
+    --text-primary: #111827;
+
+    --text-secondary: #4b5563;
+
+    --text-muted: #6b7280;
+
+
+
+    --background: #f8fafc;
+
+    --surface: #ffffff;
+
+    --border: #e5e7eb;
+
+
+
+    /* Shadows */
+
+
+    --shadow-sm:
+
+        0 4px 12px rgba(0,0,0,0.06);
+
+
+
+    --shadow-md:
+
+        0 10px 25px rgba(0,0,0,0.08);
+
+
+
+    --shadow-lg:
+
+        0 15px 35px rgba(0,0,0,0.12);
+
+
+
+
+    /* Radius */
+
+
+    --radius-sm: 8px;
+
+    --radius-md: 16px;
+
+    --radius-lg: 20px;
+
+
+
+
+
+    /* Typography */
+
+
+    font-family:
+
+        Inter,
+
+        system-ui,
+
+        -apple-system,
+
+        BlinkMacSystemFont,
+
+        "Segoe UI",
+
+        sans-serif;
+
+
+
+    color: var(--text-primary);
+
+    background: var(--background);
+
+
+
+    font-synthesis: none;
+
+    text-rendering: optimizeLegibility;
+
+    -webkit-font-smoothing: antialiased;
+
+    -moz-osx-font-smoothing: grayscale;
+
+
+}
+
+
+
+
+
 
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f5f5f5;
-  color: #222;
+
+
+    min-width: 320px;
+
+
+    min-height: 100vh;
+
+
+    background: var(--background);
+
+
+    color: var(--text-primary);
+
+
 }
 
 
+
+
+
+
+button,
+input,
+textarea {
+
+
+    font: inherit;
+
+
+}
+
+
+
+button {
+
+
+    cursor: pointer;
+
+
+}
+
+
+
+
+
+img {
+
+
+    display: block;
+
+
+    max-width: 100%;
+
+
+}
+
+
+
+
+
+a {
+
+
+    color: inherit;
+
+
+    text-decoration: none;
+
+
+}
+
+
+
+
+
 #root {
-  min-height: 100vh;
+
+
+    min-height: 100vh;
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   Navbar
+========================= */
+
+
+.navbar {
+
+
+    display: flex;
+
+
+    justify-content: space-between;
+
+
+    align-items: center;
+
+
+    padding: 20px 40px;
+
+
+    background: var(--surface);
+
+
+    border-bottom: 1px solid var(--border);
+
+
+    position: sticky;
+
+
+    top: 0;
+
+
+    z-index: 1000;
+
+
+}
+
+
+
+
+
+
+.navbar-brand a {
+
+
+    font-size: 26px;
+
+
+    font-weight: 800;
+
+
+    color: var(--text-primary);
+
+
+    letter-spacing: -0.5px;
+
+
+}
+
+
+
+
+
+
+
+.navbar-links {
+
+
+    display: flex;
+
+
+    align-items: center;
+
+
+    gap: 30px;
+
+
+}
+
+
+
+
+
+
+
+.navbar-links a {
+
+
+    position: relative;
+
+
+    color: var(--text-secondary);
+
+
+    font-weight: 600;
+
+
+    transition: color 0.25s ease;
+
+
+}
+
+
+
+
+
+
+
+.navbar-links a:hover {
+
+
+    color: var(--primary);
+
+
+}
+
+
+
+
+
+
+
+.active-link {
+
+
+    color: var(--primary) !important;
+
+
+}
+
+
+
+
+
+
+
+.active-link::after {
+
+
+    content: "";
+
+
+    position: absolute;
+
+
+    left: 0;
+
+
+    bottom: -8px;
+
+
+    width: 100%;
+
+
+    height: 3px;
+
+
+    background: var(--primary);
+
+
+    border-radius: 10px;
+
+
+}
+
+
+
+
+
+
+
+.menu-toggle {
+
+
+    display: none;
+
+
+    background: transparent;
+
+
+    border: none;
+
+
+    font-size: 28px;
+
+
+    color: var(--text-primary);
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   Home Page
+========================= */
+
+
+.home-page {
+
+
+    padding: 40px;
+
+
+}
+
+
+
+
+
+
+
+.page-title {
+
+
+    text-align: center;
+
+
+    margin-bottom: 35px;
+
+
+    font-size: 2rem;
+
+
+    color: var(--text-primary);
+
+
+}
+
+
+
+
+
+
+
+.property-grid {
+
+
+    display: grid;
+
+
+    grid-template-columns: repeat(3, 1fr);
+
+
+    gap: 25px;
+
+
+}
+
+/* =========================
+   Property Card
+========================= */
+
+
+.property-card {
+
+
+    background: var(--surface);
+
+
+    border-radius: var(--radius-md);
+
+
+    overflow: hidden;
+
+
+    box-shadow: var(--shadow-md);
+
+
+    display: flex;
+
+
+    flex-direction: column;
+
+
+    transition:
+
+        transform 0.3s ease,
+
+        box-shadow 0.3s ease;
+
+
+}
+
+
+
+
+
+
+
+.property-card:hover {
+
+
+    transform: translateY(-6px);
+
+
+    box-shadow: var(--shadow-lg);
+
+
+}
+
+
+
+
+
+
+
+.property-image-wrapper {
+
+
+    overflow: hidden;
+
+
+}
+
+
+
+
+
+
+
+.property-image {
+
+
+    width: 100%;
+
+
+    height: 240px;
+
+
+    object-fit: cover;
+
+
+    transition: transform 0.4s ease;
+
+
+}
+
+
+
+
+
+
+
+.property-card:hover .property-image {
+
+
+    transform: scale(1.05);
+
+
+}
+
+
+
+
+
+
+
+.property-content {
+
+
+    padding: 22px;
+
+
+    display: flex;
+
+
+    flex-direction: column;
+
+
+    flex: 1;
+
+
+}
+
+
+
+
+
+
+
+.property-title {
+
+
+    font-size: 1.25rem;
+
+
+    font-weight: 700;
+
+
+    color: var(--text-primary);
+
+
+    margin-bottom: 14px;
+
+
+}
+
+
+
+
+
+
+
+.property-meta {
+
+
+    display: flex;
+
+
+    flex-direction: column;
+
+
+    gap: 8px;
+
+
+    margin-bottom: 15px;
+
+
+}
+
+
+
+
+
+
+
+.property-price {
+
+
+    font-size: 1.25rem;
+
+
+    font-weight: 800;
+
+
+    color: var(--primary);
+
+
+}
+
+
+
+
+
+
+
+.property-location {
+
+
+    color: var(--text-secondary);
+
+
+    font-size: 0.95rem;
+
+
+}
+
+
+
+
+
+
+
+.property-description {
+
+
+    color: var(--text-muted);
+
+
+    line-height: 1.7;
+
+
+    font-size: 0.95rem;
+
+
+    min-height: 78px;
+
+
+    margin-bottom: 10px;
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   Action Buttons
+========================= */
+
+
+.property-actions,
+.details-actions {
+
+
+    display: flex;
+
+
+    gap: 12px;
+
+
+    margin-top: 25px;
+
+
+    flex-wrap: wrap;
+
+
+}
+
+
+
+
+
+
+
+.view-details-btn,
+.edit-btn,
+.delete-btn {
+
+
+    padding: 10px 16px;
+
+
+    border-radius: var(--radius-sm);
+
+
+    border: none;
+
+
+    font-weight: 600;
+
+
+    display: inline-flex;
+
+
+    align-items: center;
+
+
+    justify-content: center;
+
+
+    transition: all 0.25s ease;
+
+
+}
+
+
+
+
+
+
+
+.view-details-btn {
+
+
+    background: var(--primary);
+
+
+    color: white;
+
+
+}
+
+
+
+
+
+
+
+.view-details-btn:hover {
+
+
+    background: var(--primary-hover);
+
+
+    transform: translateY(-2px);
+
+
+}
+
+
+
+
+
+
+
+.edit-btn {
+
+
+    background: var(--warning);
+
+
+    color: white;
+
+
+}
+
+
+
+
+
+
+
+.edit-btn:hover {
+
+
+    background: #d97706;
+
+
+    transform: translateY(-2px);
+
+
+}
+
+
+
+
+
+
+
+.delete-btn {
+
+
+    background: var(--danger);
+
+
+    color: white;
+
+
+}
+
+
+
+
+
+
+
+.delete-btn:hover {
+
+
+    background: #b91c1c;
+
+
+    transform: translateY(-2px);
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   Property Details Page
+========================= */
+
+
+.property-details-page {
+
+
+    padding: 40px;
+
+
+}
+
+
+
+
+
+
+
+.back-btn {
+
+
+    display: inline-block;
+
+
+    margin-bottom: 25px;
+
+
+    color: var(--primary);
+
+
+    font-weight: 600;
+
+
+}
+
+
+
+
+
+
+
+.back-btn:hover {
+
+
+    text-decoration: underline;
+
+
+}
+
+
+
+
+
+
+
+.property-details-card {
+
+
+    max-width: 900px;
+
+
+    margin: 0 auto;
+
+
+    background: var(--surface);
+
+
+    border-radius: var(--radius-lg);
+
+
+    overflow: hidden;
+
+
+    box-shadow: var(--shadow-lg);
+
+
+}
+
+
+
+
+
+
+
+.details-image {
+
+
+    width: 100%;
+
+
+    height: 450px;
+
+
+    object-fit: cover;
+
+
+}
+
+
+
+
+
+
+
+.details-content {
+
+
+    padding: 30px;
+
+
+}
+
+
+
+
+
+
+
+.details-content h1 {
+
+
+    font-size: 2rem;
+
+
+    margin-bottom: 20px;
+
+
+    color: var(--text-primary);
+
+
+}
+
+
+
+
+
+
+
+.details-price {
+
+
+    color: var(--primary);
+
+
+    font-size: 1.5rem;
+
+
+    margin-bottom: 15px;
+
+
+}
+
+
+
+
+
+
+
+.details-location {
+
+
+    color: var(--text-secondary);
+
+
+    font-size: 1.1rem;
+
+
+    margin-bottom: 20px;
+
+
+}
+
+
+
+
+
+
+
+.details-description {
+
+
+    color: var(--text-muted);
+
+
+    line-height: 1.8;
+
+
+}
+
+
+
+
+
+
+
+.loading {
+
+
+    text-align: center;
+
+
+    padding: 50px;
+
+
+    color: var(--text-muted);
+
+
+}
+
+
+/* =========================
+   Property Form
+========================= */
+
+
+.property-form {
+
+
+    max-width: 700px;
+
+
+    margin: 0 auto 40px;
+
+
+    padding: 30px;
+
+
+    background: var(--surface);
+
+
+    border-radius: var(--radius-md);
+
+
+    box-shadow: var(--shadow-md);
+
+
+    display: flex;
+
+
+    flex-direction: column;
+
+
+    gap: 18px;
+
+
+}
+
+
+
+
+
+
+
+.property-form h2 {
+
+
+    margin-bottom: 8px;
+
+
+    color: var(--text-primary);
+
+
+}
+
+
+
+
+
+
+
+.property-form input,
+.property-form textarea {
+
+
+    width: 100%;
+
+
+    padding: 14px 16px;
+
+
+    border: 1px solid var(--border);
+
+
+    border-radius: var(--radius-sm);
+
+
+    outline: none;
+
+
+    color: var(--text-primary);
+
+
+    transition:
+
+
+        border-color 0.25s ease,
+
+
+        box-shadow 0.25s ease;
+
+
+}
+
+
+
+
+
+
+
+.property-form textarea {
+
+
+    min-height: 130px;
+
+
+    resize: vertical;
+
+
+}
+
+
+
+
+
+
+
+.property-form input:focus,
+.property-form textarea:focus {
+
+
+    border-color: var(--primary);
+
+
+    box-shadow:
+
+        0 0 0 4px rgba(37,99,235,0.12);
+
+
+}
+
+
+
+
+
+
+
+.property-form input::placeholder,
+.property-form textarea::placeholder {
+
+
+    color: #9ca3af;
+
+
+}
+
+
+
+
+
+
+
+.property-form button {
+
+
+    padding: 14px 18px;
+
+
+    border: none;
+
+
+    border-radius: var(--radius-sm);
+
+
+    background: var(--primary);
+
+
+    color: white;
+
+
+    font-weight: 700;
+
+
+    transition: all 0.25s ease;
+
+
+}
+
+
+
+
+
+
+
+.property-form button:hover {
+
+
+    background: var(--primary-hover);
+
+
+    transform: translateY(-2px);
+
+
+}
+
+
+
+
+
+
+
+.property-form button:disabled {
+
+
+    opacity: 0.7;
+
+
+    cursor: not-allowed;
+
+
+    transform: none;
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   Empty State
+========================= */
+
+
+.empty-state {
+
+
+    max-width: 600px;
+
+
+    margin: 50px auto;
+
+
+    padding: 45px 30px;
+
+
+    text-align: center;
+
+
+    background: var(--surface);
+
+
+    border-radius: var(--radius-md);
+
+
+    box-shadow: var(--shadow-md);
+
+
+}
+
+
+
+
+
+
+
+.empty-icon {
+
+
+    font-size: 3rem;
+
+
+    margin-bottom: 20px;
+
+
+}
+
+
+
+
+
+
+
+.empty-state h2 {
+
+
+    color: var(--text-primary);
+
+
+    margin-bottom: 12px;
+
+
+}
+
+
+
+
+
+
+
+.empty-state p {
+
+
+    color: var(--text-muted);
+
+
+    margin-bottom: 25px;
+
+
+    line-height: 1.6;
+
+
+}
+
+
+
+
+
+
+
+.empty-action {
+
+
+    display: inline-flex;
+
+
+    padding: 12px 22px;
+
+
+    border-radius: var(--radius-sm);
+
+
+    background: var(--primary);
+
+
+    color: white;
+
+
+    font-weight: 700;
+
+
+    transition: all 0.25s ease;
+
+
+}
+
+
+
+
+
+
+
+.empty-action:hover {
+
+
+    background: var(--primary-hover);
+
+
+    transform: translateY(-2px);
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   Error State
+========================= */
+
+
+.error-message {
+
+
+    max-width: 600px;
+
+
+    margin: 40px auto;
+
+
+    padding: 25px;
+
+
+    background: #fee2e2;
+
+
+    border-radius: var(--radius-md);
+
+
+    text-align: center;
+
+
+    color: #991b1b;
+
+
+}
+
+
+
+
+
+
+
+.error-message p {
+
+
+    margin-bottom: 15px;
+
+
+    font-weight: 600;
+
+
+}
+
+
+
+
+
+
+
+.error-message button {
+
+
+    padding: 10px 18px;
+
+
+    border: none;
+
+
+    border-radius: var(--radius-sm);
+
+
+    background: var(--danger);
+
+
+    color: white;
+
+
+    font-weight: 600;
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   Loading Spinner
+========================= */
+
+
+.loading-container {
+
+
+    min-height: 300px;
+
+
+    display: flex;
+
+
+    flex-direction: column;
+
+
+    justify-content: center;
+
+
+    align-items: center;
+
+
+    gap: 15px;
+
+
+    color: var(--text-muted);
+
+
+}
+
+
+
+
+
+
+
+.spinner {
+
+
+    width: 45px;
+
+
+    height: 45px;
+
+
+    border: 4px solid #e5e7eb;
+
+
+    border-top-color: var(--primary);
+
+
+    border-radius: 50%;
+
+
+    animation: spin 0.8s linear infinite;
+
+
+}
+
+
+
+
+
+
+
+@keyframes spin {
+
+
+    from {
+
+        transform: rotate(0deg);
+
+    }
+
+
+    to {
+
+        transform: rotate(360deg);
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   Toast Notification
+========================= */
+
+
+.toast {
+
+
+    position: fixed;
+
+
+    top: 25px;
+
+
+    right: 25px;
+
+
+    padding: 14px 22px;
+
+
+    border-radius: var(--radius-sm);
+
+
+    color: white;
+
+
+    font-weight: 600;
+
+
+    box-shadow: var(--shadow-md);
+
+
+    z-index: 9999;
+
+
+    animation: slideIn 0.3s ease;
+
+
+}
+
+
+
+
+
+
+
+.toast.success {
+
+
+    background: var(--success);
+
+
+}
+
+
+
+
+
+
+
+.toast.error {
+
+
+    background: var(--danger);
+
+
+}
+
+
+
+
+
+
+
+@keyframes slideIn {
+
+
+    from {
+
+
+        opacity: 0;
+
+
+        transform: translateX(40px);
+
+
+    }
+
+
+    to {
+
+
+        opacity: 1;
+
+
+        transform: translateX(0);
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   Responsive Design
+========================= */
+
+
+@media (max-width: 1024px) {
+
+
+    .property-grid {
+
+
+        grid-template-columns: repeat(2, 1fr);
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+@media (max-width: 640px) {
+
+
+
+    .navbar {
+
+
+        padding: 18px 20px;
+
+
+    }
+
+
+
+
+
+    .menu-toggle {
+
+
+        display: block;
+
+
+    }
+
+
+
+
+
+    .navbar-links {
+
+
+        position: absolute;
+
+
+        top: 75px;
+
+
+        left: 0;
+
+
+        width: 100%;
+
+
+        background: var(--surface);
+
+
+        flex-direction: column;
+
+
+        padding: 25px;
+
+
+        display: none;
+
+
+        box-shadow: var(--shadow-md);
+
+
+    }
+
+
+
+
+
+    .navbar-links.open {
+
+
+        display: flex;
+
+
+    }
+
+
+
+
+
+    .home-page,
+    .property-details-page {
+
+
+        padding: 20px;
+
+
+    }
+
+
+
+
+
+    .property-grid {
+
+
+        grid-template-columns: 1fr;
+
+
+    }
+
+
+
+
+
+    .details-image {
+
+
+        height: 260px;
+
+
+    }
+
+
+
+
+
+    .details-content {
+
+
+        padding: 20px;
+
+
+    }
+
+
+
+
+
+    .property-actions button,
+    .property-actions a,
+    .details-actions button,
+    .details-actions a {
+
+
+        width: 100%;
+
+
+    }
+
+
 }

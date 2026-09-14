@@ -65,14 +65,6 @@ app.use(
 );
 
 
-// TEST ROUTE (temporary)
-app.get("/test", (req, res) => {
-    res.json({
-        message: "test route works"
-    });
-});
-
-
 
 
 // API Routes

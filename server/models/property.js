@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { minLength } = require("zod");
+
 
 
 const propertySchema = new mongoose.Schema(

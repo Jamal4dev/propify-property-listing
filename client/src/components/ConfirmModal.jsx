@@ -21,11 +21,11 @@ function ConfirmModal({
         <div className="modal-overlay">
 
 
-            <div className="confirm-modal">
+            <dialog className="confirm-modal" open aria-labelledby="confirm-title">
 
 
 
-                <h2>
+                <h2 id="confirm-title">
 
                     {title}
 
@@ -91,7 +91,7 @@ function ConfirmModal({
 
 
 
-            </div>
+            </dialog>
 
 
 

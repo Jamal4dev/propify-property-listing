@@ -1,60 +1,39 @@
-import api from "./api";
-
+import API from "./api";
 
 
 // Get all properties
-export const getProperties = async (params = {}) => {
+export const getProperties = async (filters = {}) => {
 
-    const response = await api.get(
-        "/properties",
-        {
-            params
-        }
-    );
-
+    const response = await API.get("/properties", {
+        params: filters
+    });
 
     return response.data.data;
 
 };
-
-
 
 
 // Get single property
 export const getProperty = async (id) => {
 
-
-    const response =
-        await api.get(
-            `/properties/${id}`
-        );
-
+    const response = await API.get(`/properties/${id}`);
 
     return response.data.data;
 
-
 };
-
-
 
 
 // Create property
 export const createProperty = async (propertyData) => {
 
-
-    const response =
-        await api.post(
-            "/properties",
-            propertyData
-        );
-
+    const response = await API.post(
+        "/properties",
+        propertyData
+    );
 
     return response.data.data;
 
-
 };
-
-
 
 
 // Update property
@@ -63,33 +42,23 @@ export const updateProperty = async (
     propertyData
 ) => {
 
-
-    const response =
-        await api.put(
-            `/properties/${id}`,
-            propertyData
-        );
-
+    const response = await API.put(
+        `/properties/${id}`,
+        propertyData
+    );
 
     return response.data.data;
 
-
 };
-
-
 
 
 // Delete property
 export const deleteProperty = async (id) => {
 
+    const response = await API.delete(
+        `/properties/${id}`
+    );
 
-    const response =
-        await api.delete(
-            `/properties/${id}`
-        );
-
-
-    return response.data;
-
+    return response.data.data;
 
 };

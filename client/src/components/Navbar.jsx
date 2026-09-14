@@ -23,17 +23,16 @@ function Navbar() {
     return (
 
 
-        <nav className="navbar">
+        <nav className="navbar" aria-label="Primary navigation">
 
 
 
             <div className="navbar-brand">
 
 
-                <NavLink to="/">
-
-                    Propify
-
+                <NavLink to="/" className="brand-link" aria-label="Propify home">
+                    <span className="brand-mark" aria-hidden="true">P</span>
+                    <span>Propify</span>
                 </NavLink>
 
 
@@ -48,13 +47,21 @@ function Navbar() {
 
                 className="menu-toggle"
 
+                type="button"
+
+                aria-expanded={menuOpen}
+
+                aria-controls="primary-navigation"
+
+                aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+
                 onClick={() =>
                     setMenuOpen(!menuOpen)
                 }
 
             >
 
-                {menuOpen ? "✕" : "☰"}
+                <span aria-hidden="true">{menuOpen ? "✕" : "☰"}</span>
 
 
             </button>
@@ -66,6 +73,8 @@ function Navbar() {
 
 
             <div
+
+                id="primary-navigation"
 
                 className={
                     menuOpen

@@ -107,6 +107,8 @@ function PropertyCard({
 
             <div className="property-image-wrapper">
 
+                <span className="property-type-badge">For sale</span>
+
 
 
                 <img
@@ -146,11 +148,12 @@ function PropertyCard({
 
 
 
-                <h2 className="property-title">
-
-                    {property.title}
-
-                </h2>
+                <div className="property-heading">
+                    <p className="property-kicker">Featured listing</p>
+                    <h2 className="property-title">
+                        {property.title}
+                    </h2>
+                </div>
 
 
 
@@ -186,7 +189,7 @@ function PropertyCard({
 
                     <p className="property-location">
 
-                        📍 {property.location}
+                        <span aria-hidden="true">⌖</span> {property.location}
 
                     </p>
 

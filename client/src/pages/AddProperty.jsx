@@ -22,9 +22,11 @@ function AddProperty() {
         <main className="home-page">
 
 
-            <h1 className="page-title">
-                Add New Property
-            </h1>
+            <div className="page-intro">
+                <p className="eyebrow">Share a space</p>
+                <h1 className="page-title">Add a new property</h1>
+                <p>Give future residents a clear, honest first look at what makes this place special.</p>
+            </div>
 
 
 

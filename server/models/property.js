@@ -24,12 +24,26 @@ const propertySchema = new mongoose.Schema(
 
         description: {
             type: String,
-            required: true
+            required: true,
+            trim: true,
+            minlength: 20
         },
 
         imageUrl: {
             type: String,
-            required: true
+            required: true,
+            trim: true,
+            validate: {
+                validator: (value) => {
+                    try {
+                        new URL(value);
+                        return true;
+                    } catch {
+                        return false;
+                    }
+                },
+                message: "imageUrl must be a valid URL"
+            }
         }
     },
     {

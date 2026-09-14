@@ -156,12 +156,38 @@ function PropertyDetails() {
 
 
     useEffect(() => {
+        let cancelled = false;
 
+        const loadProperty = async () => {
+            try {
+                setLoading(true);
+                setError("");
+                setImageError(false);
+                const data = await getProperty(id);
 
-        fetchProperty();
+                if (!cancelled) {
+                    setProperty(data);
+                }
+            } catch (error) {
+                console.error("Failed to fetch property:", error);
 
+                if (!cancelled) {
+                    setProperty(null);
+                    setError(error.response?.data?.message ||
+                        "Unable to load property details.");
+                }
+            } finally {
+                if (!cancelled) {
+                    setLoading(false);
+                }
+            }
+        };
 
+        void loadProperty();
 
+        return () => {
+            cancelled = true;
+        };
     }, [id]);
 
 

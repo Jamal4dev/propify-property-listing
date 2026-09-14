@@ -1,163 +1,317 @@
-# 🏠 Propify - MERN Property Listing Application
+# Propify
 
-A full-stack real estate property listing application built using the MERN stack.
+[![React](https://img.shields.io/badge/React-19.3.0-20232A?logo=react&logoColor=61DAFB)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-8.3.0-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
+[![Express](https://img.shields.io/badge/Express-5.2.1-000000?logo=express&logoColor=white)](https://expressjs.com/)
+[![Mongoose](https://img.shields.io/badge/Mongoose-8.24.4-880000?logo=mongoose&logoColor=white)](https://mongoosejs.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/atlas)
 
-Propify allows users to create, view, update, search, filter, and delete property listings through a modern responsive interface.
+A full-stack real estate property listing platform built with the MERN stack. Propify gives users a focused marketplace experience for browsing, searching, creating, updating, and removing property listings backed by MongoDB persistence.
 
-This project was built to demonstrate full-stack development skills including React frontend development, REST API design, MongoDB database integration, and CRUD operations.
+The project solves a common property discovery problem: keeping listing data, search and price filters, detail views, and CRUD workflows in one responsive application rather than scattering those tasks across disconnected tools.
 
----
+## Live Demo
 
-## 🚀 Live Demo
+- **Frontend:** `[Netlify URL]`
+- **Backend API:** `https://propify-api-81qi.onrender.com`
 
-Coming soon.
+These placeholders are intentionally left for the deployed URLs to be added later.
 
----
+## Screenshots
 
-## 📸 Screenshots
+Replace the following placeholders with screenshots from the deployed application:
 
-Coming soon.
+| View | Screenshot |
+| --- | --- |
+| Homepage and property listings | ![Propify homepage and property listings](docs/screenshots/homepage.png) |
+| Property details | ![Propify property details page](docs/screenshots/property-details.png) |
+| Add property form | ![Propify add property form](docs/screenshots/add-property.png) |
+| Mobile responsive view | ![Propify mobile responsive layout](docs/screenshots/mobile.png) |
 
----
+## Features
 
-# ✨ Features
+### Property workflows
 
-## Property Management
+- Browse all available property listings.
+- Open a dedicated details page for a property.
+- Create a property with title, price, location, description, and image URL fields.
+- Edit existing property information.
+- Delete properties after confirmation.
+- Persist property records in MongoDB through the Express API.
 
-✅ Create new properties  
-✅ View all properties  
-✅ View property details  
-✅ Update existing properties  
-✅ Delete properties with confirmation modal  
+### Search and usability
 
-## Search & Filtering
+- Search by title, location, or description.
+- Filter by minimum and maximum price.
+- Sort by newest, lowest price, or highest price.
+- Responsive layouts for desktop, tablet, and mobile screens.
+- Loading, empty, and API error states.
+- Toast feedback for update and delete workflows.
+- Client-side and server-side validation for property data.
+- Image URL preview and fallback handling.
+- Accessible labels, navigation states, confirmation dialogs, and live status feedback.
 
-✅ Search properties by keyword  
-✅ Filter property listings  
-✅ Dynamic property results  
+## Tech Stack
 
-## User Experience
+### Frontend
 
-✅ Responsive design  
-✅ Loading states  
-✅ Error handling  
-✅ Toast notifications  
-✅ Form validation  
-✅ Image URL preview validation  
-✅ Custom confirmation modal  
+| Technology | Role |
+| --- | --- |
+| React | Component-based user interface |
+| React Router | Client-side routing for listing, details, add, edit, and not-found views |
+| Vite | Frontend development server and production bundler |
+| Axios | HTTP requests to the backend API |
+| CSS | Custom responsive design system and UI styling |
 
----
+### Backend and data
 
-# 🛠️ Tech Stack
+| Technology | Role |
+| --- | --- |
+| Node.js | JavaScript runtime for the API server |
+| Express | REST API framework |
+| Mongoose | MongoDB object modeling and schema validation |
+| MongoDB Atlas | Hosted persistence for property records |
+| Helmet | HTTP security headers |
+| CORS | Configurable frontend origin access |
+| dotenv | Environment variable loading |
 
-## Frontend
+### Deployment
 
-- React.js
-- React Router
-- Axios
-- Vite
-- CSS3
+| Platform | Role |
+| --- | --- |
+| Netlify | Planned frontend hosting target |
+| Render | Planned backend hosting target |
+| MongoDB Atlas | Hosted database |
 
-## Backend
+## Application Architecture
 
-- Node.js
-- Express.js
-- REST API
+```text
+User
+  |
+  v
+React + Vite frontend
+  |
+  | Axios requests to /api/properties
+  v
+Express REST API
+  |
+  | Mongoose models and validation
+  v
+MongoDB Atlas
+```
 
-## Database
+- **React frontend:** renders the marketplace interface, handles routing and form interaction, and manages loading, errors, filters, and local UI state.
+- **Express API:** exposes property CRUD endpoints, validates request data, applies search/filter/sort query logic, and returns consistent JSON responses.
+- **Mongoose and MongoDB Atlas:** define and persist property records with timestamps and schema validation.
 
-- MongoDB
-- Mongoose
+## Project Structure
 
-## Development Tools
+```text
+propify-property-listing/
+├── client/
+│   ├── .env.example
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package.json
+│   ├── vite.config.js
+│   └── src/
+│       ├── App.jsx
+│       ├── index.css
+│       ├── main.jsx
+│       ├── components/
+│       │   ├── ConfirmModal.jsx
+│       │   ├── Loading.jsx
+│       │   ├── Navbar.jsx
+│       │   ├── PropertyCard.jsx
+│       │   ├── PropertyForm.jsx
+│       │   ├── SearchFilter.jsx
+│       │   └── Toast.jsx
+│       ├── pages/
+│       │   ├── AddProperty.jsx
+│       │   ├── EditProperty.jsx
+│       │   ├── Home.jsx
+│       │   ├── NotFound.jsx
+│       │   └── PropertyDetails.jsx
+│       └── services/
+│           ├── api.js
+│           └── propertyService.js
+├── server/
+│   ├── .env.example
+│   ├── package.json
+│   ├── server.js
+│   ├── config/
+│   │   └── db.js
+│   ├── controllers/
+│   │   └── propertyController.js
+│   ├── models/
+│   │   └── property.js
+│   └── routes/
+│       └── propertyRoutes.js
+├── .gitignore
+└── README.md
+```
 
-- Git
-- GitHub
-- VS Code
+## Installation
 
----
-
-# 📂 Project Structure
-propify-property-listing
-├── client │   ├── src │   │   ├── components │   │   │   ├── ConfirmModal.jsx │   │   │   ├── Loading.jsx │   │   │   ├── Navbar.jsx │   │   │   ├── PropertyCard.jsx │   │   │   ├── PropertyForm.jsx │   │   │   ├── SearchFilter.jsx │   │   │   └── Toast.jsx │   │   │ │   │   ├── pages │   │   │   ├── Home.jsx │   │   │   ├── AddProperty.jsx │   │   │   ├── EditProperty.jsx │   │   │   ├── PropertyDetails.jsx │   │   │   └── NotFound.jsx │   │   │ │   │   └── services │   │       ├── api.js │   │       └── propertyService.js │ └── server ├── config │   └── db.js │ ├── controllers │   └── propertyController.js │ ├── models │   └── property.js │ ├── routes │   └── propertyRoutes.js │ └── server.js
-
----
-
-# ⚙️ Installation & Setup
-
-## Clone Repository
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/Jamal4dev/propify-property-listing.git
-
 cd propify-property-listing
-Backend Setup
-Navigate into server:
+```
+
+### 2. Install backend dependencies
+
+```bash
 cd server
-Install dependencies:
 npm install
-Create a .env file:
+```
+
+### 3. Install frontend dependencies
+
+Open a second terminal from the repository root:
+
+```bash
+cd client
+npm install
+```
+
+## Environment Variables
+
+Create `server/.env` from `server/.env.example`:
+
+```env
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
-Start backend:
-Development:
+CORS_ORIGIN=http://localhost:5173
+```
+
+Create `client/.env` from `client/.env.example`:
+
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+`VITE_API_URL` should point to the API base path ending in `/api`, not the individual `/properties` resource path.
+
+`CORS_ORIGIN` accepts a comma-separated list of allowed frontend origins when more than one deployment origin is required.
+
+> Never commit `.env` files or database credentials. Environment files are ignored by Git. Store production secrets in the Render, Netlify, or other deployment platform environment-variable dashboards.
+
+## Running Locally
+
+### Start the backend
+
+From `server/`:
+
+```bash
 npm run dev
-Production:
+```
+
+For a production-style local start:
+
+```bash
 npm start
-Backend runs on:
-http://localhost:5000
-Frontend Setup
-Open another terminal:
-cd client
-Install dependencies:
-npm install
-Create .env:
-VITE_API_URL=http://localhost:5000/api/properties
-Start frontend:
+```
+
+The API listens on `http://localhost:5000` by default.
+
+### Start the frontend
+
+From `client/`:
+
+```bash
 npm run dev
-Frontend runs on:
-http://localhost:5173
-🔌 API Endpoints
-Base URL:
-/api/properties
-Method
-Endpoint
-Description
-GET
-/api/properties
-Get all properties
-GET
-/api/properties/:id
-Get single property
-POST
-/api/properties
-Create property
-PUT
-/api/properties/:id
-Update property
-DELETE
-/api/properties/:id
-Delete property
-🧪 Validation
-The application includes:
-Required field validation
-Price validation
-Description length validation
-Image URL validation
-API error handling
-🔮 Future Improvements
-Planned features:
-User authentication
-Property ownership
-Image uploads with Cloudinary
-Favorites system
-Advanced filtering
-Pagination
-Admin dashboard
-Deployment with CI/CD
-👨‍💻 Author
-Samuel Ayomide Adeniyi
+```
+
+The Vite development server listens on `http://localhost:5173` by default.
+
+## API Documentation
+
+The API uses a consistent response envelope:
+
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
+Errors use:
+
+```json
+{
+  "success": false,
+  "message": "Description of the error"
+}
+```
+
+### Health check
+
+```http
+GET /
+```
+
+Returns a basic API health response.
+
+### Property endpoints
+
+Base resource: `/api/properties`
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `GET` | `/api/properties` | Return all properties. Supports `search`, `minPrice`, `maxPrice`, and `sort` query parameters. |
+| `GET` | `/api/properties/:id` | Return one property by MongoDB ID. |
+| `POST` | `/api/properties` | Create a property. |
+| `PUT` | `/api/properties/:id` | Update one or more property fields. |
+| `DELETE` | `/api/properties/:id` | Delete a property. |
+
+Property records contain these fields:
+
+- `_id`
+- `title`
+- `price`
+- `location`
+- `description`
+- `imageUrl`
+- `createdAt`
+- `updatedAt`
+
+## Quality Checks
+
+The current project has been validated with:
+
+```bash
+cd client
+npm run lint
+npm run build
+```
+
+A manual Playwright browser validation was also performed against the running frontend and real MongoDB-backed API. It covered property creation, homepage loading, search/filtering, details navigation, editing, deletion, deletion persistence after refresh, mobile navigation, and unknown-route handling.
+
+There is currently no automated Playwright test script or test suite committed in the repository.
+
+## Future Improvements
+
+The following are roadmap ideas and are **not currently implemented**:
+
+- User authentication and protected property management.
+- Image upload and hosted media storage.
+- Favorites or saved listings.
+- Property categories and amenities.
+- More advanced search and location filtering.
+- Pagination for larger datasets.
+- Automated unit, integration, and end-to-end test suites.
+- Analytics or an administrative moderation dashboard.
+
+## Author
+
+**Samuel Ayomide Adeniyi**  
 Frontend Developer | MERN Stack Developer
-GitHub:
-https://github.com/Jamal4dev⁠�
-⭐ If you found this project useful, consider giving it a star.
+
+- GitHub: `[GitHub profile link]`
+- LinkedIn: `[LinkedIn profile link]`
+
+---
+
+Propify is intended as a portfolio and learning project demonstrating full-stack CRUD workflows, API integration, MongoDB persistence, responsive UI design, and deployment-ready configuration.

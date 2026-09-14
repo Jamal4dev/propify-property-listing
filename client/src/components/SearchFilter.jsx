@@ -95,11 +95,14 @@ function SearchFilter({
         <form
             className="search-filter"
             onSubmit={handleSubmit}
+            aria-label="Search and filter properties"
         >
 
 
-
-            <input
+            <div className="filter-field filter-search-field">
+                <label htmlFor="property-search">Search listings</label>
+                <input
+                id="property-search"
 
                 type="text"
 
@@ -111,15 +114,18 @@ function SearchFilter({
 
                 onChange={handleChange}
 
-            />
+                />
+            </div>
 
 
 
 
 
 
-
-            <input
+            <div className="filter-field">
+                <label htmlFor="minimum-price">Minimum price</label>
+                <input
+                id="minimum-price"
 
                 type="number"
 
@@ -131,15 +137,18 @@ function SearchFilter({
 
                 onChange={handleChange}
 
-            />
+                />
+            </div>
 
 
 
 
 
 
-
-            <input
+            <div className="filter-field">
+                <label htmlFor="maximum-price">Maximum price</label>
+                <input
+                id="maximum-price"
 
                 type="number"
 
@@ -151,15 +160,18 @@ function SearchFilter({
 
                 onChange={handleChange}
 
-            />
+                />
+            </div>
 
 
 
 
 
 
-
-            <select
+            <div className="filter-field">
+                <label htmlFor="property-sort">Sort listings</label>
+                <select
+                id="property-sort"
 
                 name="sort"
 
@@ -184,7 +196,8 @@ function SearchFilter({
                 </option>
 
 
-            </select>
+                </select>
+            </div>
 
 
 

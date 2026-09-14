@@ -11,58 +11,24 @@ const propertyRoutes = require("./routes/propertyRoutes");
 
 
 const app = express();
+const allowedOrigins = new Set((process.env.CORS_ORIGIN || "http://localhost:5173")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean));
 
+app.use(helmet());
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.has(origin)) {
+            return callback(null, true);
+        }
 
-
-// Connect Database
-
-connectDB();
-
-
-
-
-// Security Middleware
-
-app.use(
-    helmet()
-);
-
-
-
-
-// CORS Configuration
-
-app.use(
-    cors({
-
-        origin: [
-
-            "http://localhost:5173"
-
-        ],
-
-        methods: [
-
-            "GET",
-            "POST",
-            "PUT",
-            "DELETE"
-
-        ],
-
-        credentials: true
-
-    })
-);
-
-
-
-
-// Body Parser
-
-app.use(
-    express.json()
-);
+        return callback(new Error("Origin is not allowed by CORS"));
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+}));
+app.use(express.json({ limit: "1mb" }));
 
 
 
@@ -80,17 +46,19 @@ app.use(
 // Health Check Route
 
 app.get("/", (req, res) => {
-
     res.json({
-
-        message:
-            "Propify API is running",
-
-        status:
-            "success"
-
+        success: true,
+        data: {
+            message: "Propify API is running"
+        }
     });
+});
 
+app.use((req, res) => {
+    res.status(404).json({
+        success: false,
+        message: "Route not found"
+    });
 });
 
 
@@ -105,11 +73,17 @@ app.use(
         console.error(err.stack);
 
 
-        res.status(500).json({
+        let statusCode = err.statusCode || 500;
+        if (err.type === "entity.parse.failed") statusCode = 400;
+        if (err.message === "Origin is not allowed by CORS") statusCode = 403;
 
-            message:
-                "Something went wrong on the server"
+        let message = err.message;
+        if (err.type === "entity.parse.failed") message = "Invalid JSON payload";
+        if (statusCode === 500) message = "Something went wrong on the server";
 
+        res.status(statusCode).json({
+            success: false,
+            message
         });
 
 
@@ -121,18 +95,18 @@ app.use(
 
 // Server Port
 
-const PORT =
-    process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
+const startServer = async () => {
+    try {
+        await connectDB();
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
+    } catch (error) {
+        console.error("Server startup failed:", error.message);
+        process.exit(1);
+    }
+};
 
-
-
-app.listen(PORT, () => {
-
-
-    console.log(
-        `🚀 Server running on port ${PORT}`
-    );
-
-
-});
+startServer();

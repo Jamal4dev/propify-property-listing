@@ -11,7 +11,7 @@ function Toast({ message, type }) {
 
     return (
 
-        <div className={`toast ${type}`}>
+        <div className={`toast ${type}`} role="status" aria-live="polite">
 
             {message}
 

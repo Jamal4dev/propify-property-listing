@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import AddProperty from "./pages/AddProperty";
 import PropertyDetails from "./pages/PropertyDetails";
 import EditProperty from "./pages/EditProperty";
+import NotFound from "./pages/NotFound";
 
 
 
@@ -66,6 +67,15 @@ function App() {
 
                 />
 
+
+
+              <Route
+
+                  path="*"
+
+                  element={<NotFound />}
+
+             />
 
             </Routes>
 

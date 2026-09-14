@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { minLength } = require("zod");
 
 
 const propertySchema = new mongoose.Schema(
@@ -11,7 +12,8 @@ const propertySchema = new mongoose.Schema(
 
         price: {
             type: Number,
-            required: true
+            required: true,
+            min: 1
         },
 
         location: {

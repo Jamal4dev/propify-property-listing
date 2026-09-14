@@ -1,13 +1,36 @@
-import { Link, useNavigate } from "react-router-dom";
+import {
+    Link,
+    useNavigate
+} from "react-router-dom";
+
+import {
+    useState
+} from "react";
+
+
+import ConfirmModal from "./ConfirmModal";
+
+
 
 
 function PropertyCard({
+
     property,
+
     onDelete
+
 }) {
 
 
+
     const navigate = useNavigate();
+
+
+
+    const [showModal, setShowModal] = useState(false);
+
+
+
 
 
 
@@ -15,24 +38,45 @@ function PropertyCard({
     const handleDelete = () => {
 
 
-        const confirmDelete = window.confirm(
-            "Are you sure you want to delete this property?"
-        );
+        setShowModal(true);
+
+
+    };
 
 
 
-        if (!confirmDelete) {
 
-            return;
 
-        }
 
+
+    const confirmDelete = () => {
 
 
         onDelete(property._id);
 
 
+
+        setShowModal(false);
+
+
     };
+
+
+
+
+
+
+
+    const cancelDelete = () => {
+
+
+        setShowModal(false);
+
+
+    };
+
+
+
 
 
 
@@ -43,6 +87,8 @@ function PropertyCard({
         ? `${property.description.substring(0, 120)}...`
 
         : property.description;
+
+
 
 
 
@@ -62,6 +108,7 @@ function PropertyCard({
             <div className="property-image-wrapper">
 
 
+
                 <img
 
                     className="property-image"
@@ -72,8 +119,11 @@ function PropertyCard({
 
                     onError={(event) => {
 
+
                         event.target.src =
+
                             "https://via.placeholder.com/600x400?text=No+Image";
+
 
                     }}
 
@@ -81,6 +131,8 @@ function PropertyCard({
 
 
             </div>
+
+
 
 
 
@@ -106,15 +158,27 @@ function PropertyCard({
 
 
 
+
+
                 <div className="property-meta">
+
+
 
 
 
                     <p className="property-price">
 
-                        ₦{Number(property.price).toLocaleString()}
+                        ₦
+                        {
+                            Number(property.price)
+
+                                .toLocaleString()
+
+                        }
 
                     </p>
+
+
 
 
 
@@ -128,7 +192,10 @@ function PropertyCard({
 
 
 
+
+
                 </div>
+
 
 
 
@@ -142,6 +209,7 @@ function PropertyCard({
                     {shortDescription}
 
                 </p>
+
 
 
 
@@ -175,19 +243,22 @@ function PropertyCard({
 
 
 
+
                     <button
 
                         className="edit-btn"
 
                         onClick={() =>
 
+
                             navigate(
+
                                 `/property/${property._id}/edit`
+
                             )
 
-                        }
 
-                        aria-label="Edit property"
+                        }
 
                     >
 
@@ -202,13 +273,12 @@ function PropertyCard({
 
 
 
+
                     <button
 
                         className="delete-btn"
 
                         onClick={handleDelete}
-
-                        aria-label="Delete property"
 
                     >
 
@@ -232,6 +302,45 @@ function PropertyCard({
 
 
 
+
+
+
+
+            {
+                showModal && (
+
+
+                    <ConfirmModal
+
+
+                        title="Delete Property?"
+
+
+                        message="Are you sure you want to permanently delete this property?"
+
+
+                        confirmText="Delete"
+
+
+                        cancelText="Cancel"
+
+
+                        onConfirm={confirmDelete}
+
+
+                        onCancel={cancelDelete}
+
+
+                    />
+
+
+                )
+            }
+
+
+
+
+
         </article>
 
 
@@ -239,6 +348,7 @@ function PropertyCard({
 
 
 }
+
 
 
 export default PropertyCard;

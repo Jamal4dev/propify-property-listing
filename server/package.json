@@ -1,23 +1,29 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Propify MERN backend API",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "mern",
+    "express",
+    "mongodb",
+    "property-listing"
+  ],
+  "author": "Jamal",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "cors": "...",
-    "dotenv": "...",
-    "express": "...",
-    "mongoose": "..."
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "helmet": "^8.3.0",
+    "mongoose": "^8.18.0"
   },
   "devDependencies": {
-    "nodemon": "..."
+    "nodemon": "^3.1.10"
   }
 }

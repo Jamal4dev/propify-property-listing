@@ -1,30 +1,58 @@
 import { useEffect, useState } from "react";
+
 import {
     createProperty,
     updateProperty
 } from "../services/propertyService";
 
 
+
 function PropertyForm({
+
     onPropertyCreated,
+
     editingProperty,
+
     onPropertyUpdated
+
 }) {
 
 
-    const [formData, setFormData] = useState({
+
+    const initialForm = {
 
         title: "",
+
         price: "",
+
         location: "",
+
         description: "",
+
         imageUrl: ""
 
-    });
+    };
+
+
+
+
+    const [formData, setFormData] = useState(initialForm);
 
 
 
     const [submitting, setSubmitting] = useState(false);
+
+
+
+    const [error, setError] = useState("");
+
+
+
+    const [imageError, setImageError] = useState(false);
+
+
+
+
 
 
 
@@ -51,10 +79,19 @@ function PropertyForm({
             });
 
 
+        } else {
+
+
+            setFormData(initialForm);
+
+
         }
 
 
+
     }, [editingProperty]);
+
+
 
 
 
@@ -74,7 +111,12 @@ function PropertyForm({
         });
 
 
+
+        setError("");
+
     };
+
+
 
 
 
@@ -85,22 +127,104 @@ function PropertyForm({
     const resetForm = () => {
 
 
-        setFormData({
+        setFormData(initialForm);
 
-            title: "",
 
-            price: "",
+        setImageError(false);
 
-            location: "",
 
-            description: "",
-
-            imageUrl: ""
-
-        });
+        setError("");
 
 
     };
+
+
+
+
+
+
+
+
+
+    const validateForm = () => {
+
+
+        const price = Number(formData.price);
+
+
+
+
+        if (!formData.title.trim()) {
+
+
+            return "Property title is required";
+
+
+        }
+
+
+
+
+
+        if (!price || price <= 0) {
+
+
+            return "Price must be greater than zero";
+
+
+        }
+
+
+
+
+
+        if (!formData.location.trim()) {
+
+
+            return "Location is required";
+
+
+        }
+
+
+
+
+
+        if (formData.description.trim().length < 20) {
+
+
+            return "Description should contain at least 20 characters";
+
+
+        }
+
+
+
+
+
+        try {
+
+
+            new URL(formData.imageUrl);
+
+
+
+        } catch {
+
+
+            return "Please enter a valid image URL";
+
+
+        }
+
+
+
+
+
+        return "";
+
+    };
+
 
 
 
@@ -115,12 +239,40 @@ function PropertyForm({
         event.preventDefault();
 
 
+
+
+        const validationError = validateForm();
+
+
+
+
+        if (validationError) {
+
+
+            setError(validationError);
+
+
+            return;
+
+
+        }
+
+
+
+
+
         setSubmitting(true);
+
+
+        setError("");
+
+
+
+
 
 
 
         try {
-
 
 
             const propertyData = {
@@ -159,7 +311,6 @@ function PropertyForm({
             } else {
 
 
-
                 await createProperty(propertyData);
 
 
@@ -192,6 +343,16 @@ function PropertyForm({
 
 
 
+            setError(
+
+                error.message ||
+
+                "Failed to save property. Please try again."
+
+            );
+
+
+
         } finally {
 
 
@@ -202,6 +363,8 @@ function PropertyForm({
 
 
     };
+
+
 
 
 
@@ -223,15 +386,19 @@ function PropertyForm({
 
 
 
+
             <h2>
 
                 {
+
                     editingProperty
 
-                    ? "Edit Property"
+                    ? "✏️ Edit Property"
 
-                    : "Add New Property"
+                    : "🏠 Add New Property"
+
                 }
+
 
             </h2>
 
@@ -241,21 +408,18 @@ function PropertyForm({
 
 
 
-            <input
 
-                type="text"
+            {
+                error && (
 
-                name="title"
+                    <p className="form-error">
 
-                placeholder="Property title"
+                        ❌ {error}
 
-                value={formData.title}
+                    </p>
 
-                onChange={handleChange}
-
-                required
-
-            />
+                )
+            }
 
 
 
@@ -263,43 +427,37 @@ function PropertyForm({
 
 
 
-            <input
 
-                type="number"
 
-                name="price"
+            <div className="form-group">
 
-                placeholder="Price"
 
-                value={formData.price}
+                <label>
 
-                onChange={handleChange}
+                    Property Title
 
-                required
-
-            />
+                </label>
 
 
 
+                <input
+
+                    type="text"
+
+                    name="title"
+
+                    placeholder="Enter property title"
+
+                    value={formData.title}
+
+                    onChange={handleChange}
+
+                    required
+
+                />
 
 
-
-
-            <input
-
-                type="text"
-
-                name="location"
-
-                placeholder="Location"
-
-                value={formData.location}
-
-                onChange={handleChange}
-
-                required
-
-            />
+            </div>
 
 
 
@@ -307,41 +465,234 @@ function PropertyForm({
 
 
 
-            <textarea
 
-                name="description"
 
-                placeholder="Description"
+            <div className="form-group">
 
-                value={formData.description}
 
-                onChange={handleChange}
+                <label>
 
-                required
+                    Price
 
-            />
+                </label>
 
 
 
+                <input
+
+                    type="number"
+
+                    name="price"
+
+                    placeholder="Enter property price"
+
+                    value={formData.price}
+
+                    onChange={handleChange}
+
+                    required
+
+                />
+
+
+            </div>
 
 
 
 
-            <input
 
-                type="url"
 
-                name="imageUrl"
 
-                placeholder="Image URL"
 
-                value={formData.imageUrl}
 
-                onChange={handleChange}
+            <div className="form-group">
 
-                required
 
-            />
+                <label>
+
+                    Location
+
+                </label>
+
+
+
+                <input
+
+                    type="text"
+
+                    name="location"
+
+                    placeholder="Enter property location"
+
+                    value={formData.location}
+
+                    onChange={handleChange}
+
+                    required
+
+                />
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+            <div className="form-group">
+
+
+                <label>
+
+                    Description
+
+                </label>
+
+
+
+                <textarea
+
+                    name="description"
+
+                    placeholder="Describe the property"
+
+                    value={formData.description}
+
+                    onChange={handleChange}
+
+                    required
+
+                />
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+            <div className="form-group">
+
+
+                <label>
+
+                    Image URL
+
+                </label>
+
+
+
+                <input
+
+                    type="text"
+
+                    name="imageUrl"
+
+                    placeholder="Paste image URL"
+
+                    value={formData.imageUrl}
+
+                    onChange={(event) => {
+
+
+                        handleChange(event);
+
+
+                        setImageError(false);
+
+
+                    }}
+
+                    required
+
+                />
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+            {
+    formData.imageUrl &&
+    !imageError &&
+    (() => {
+
+        try {
+
+            new URL(formData.imageUrl);
+
+            return (
+
+                <div className="image-preview">
+
+
+                    <img
+
+                        className="preview-image"
+
+                        src={formData.imageUrl}
+
+                        alt="Property preview"
+
+                        onError={() =>
+                            setImageError(true)
+                        }
+
+                    />
+
+
+                </div>
+
+            );
+
+
+        } catch {
+
+
+            return null;
+
+
+        }
+
+
+    })()
+}
+
+
+
+
+
+
+
+
+
+            {
+                imageError && (
+
+                    <p className="form-error">
+
+                        ❌ Image preview unavailable
+
+                    </p>
+
+                )
+            }
+
 
 
 
@@ -358,24 +709,29 @@ function PropertyForm({
 
             >
 
+
                 {
 
                     submitting
 
-                    ? "Saving..."
+                    ? editingProperty
 
-                    :
+                        ? "⏳ Updating Property..."
 
-                    editingProperty
+                        : "⏳ Adding Property..."
 
-                    ? "Update Property"
+                    : editingProperty
 
-                    : "Add Property"
+                        ? "✓ Update Property"
+
+                        : "＋ Add Property"
 
                 }
 
 
+
             </button>
+
 
 
 
@@ -388,6 +744,7 @@ function PropertyForm({
 
 
 }
+
 
 
 export default PropertyForm;

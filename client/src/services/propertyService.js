@@ -1,64 +1,95 @@
-import axios from "axios";
+import api from "./api";
 
-
-const API_URL = "http://localhost:5000/api/properties";
 
 
 // Get all properties
-export const getProperties = async () => {
+export const getProperties = async (params = {}) => {
 
-    const response = await axios.get(API_URL);
+    const response = await api.get(
+        "/properties",
+        {
+            params
+        }
+    );
 
-    return response.data;
+
+    return response.data.data;
 
 };
+
+
 
 
 // Get single property
 export const getProperty = async (id) => {
 
-    const response = await axios.get(
-        `${API_URL}/${id}`
-    );
 
-    return response.data;
+    const response =
+        await api.get(
+            `/properties/${id}`
+        );
+
+
+    return response.data.data;
+
 
 };
 
 
-// Create a new property
+
+
+// Create property
 export const createProperty = async (propertyData) => {
 
-    const response = await axios.post(
-        API_URL,
-        propertyData
-    );
 
-    return response.data;
+    const response =
+        await api.post(
+            "/properties",
+            propertyData
+        );
+
+
+    return response.data.data;
+
 
 };
 
 
-// Delete a property
+
+
+// Update property
+export const updateProperty = async (
+    id,
+    propertyData
+) => {
+
+
+    const response =
+        await api.put(
+            `/properties/${id}`,
+            propertyData
+        );
+
+
+    return response.data.data;
+
+
+};
+
+
+
+
+// Delete property
 export const deleteProperty = async (id) => {
 
-    const response = await axios.delete(
-        `${API_URL}/${id}`
-    );
+
+    const response =
+        await api.delete(
+            `/properties/${id}`
+        );
+
 
     return response.data;
 
-};
-
-
-// Update a property
-export const updateProperty = async (id, propertyData) => {
-
-    const response = await axios.put(
-        `${API_URL}/${id}`,
-        propertyData
-    );
-
-    return response.data;
 
 };

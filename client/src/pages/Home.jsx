@@ -7,8 +7,10 @@ import {
 
 
 import PropertyCard from "../components/PropertyCard";
+import PropertyForm from "../components/PropertyForm";
 import Loading from "../components/Loading";
 import Toast from "../components/Toast";
+import SearchFilter from "../components/SearchFilter";
 
 
 
@@ -17,9 +19,7 @@ function Home() {
 
     const [properties, setProperties] = useState([]);
 
-
     const [loading, setLoading] = useState(true);
-
 
     const [error, setError] = useState("");
 
@@ -28,10 +28,10 @@ function Home() {
     const [toast, setToast] = useState({
 
         message: "",
+
         type: ""
 
     });
-
 
 
 
@@ -43,6 +43,7 @@ function Home() {
         setToast({
 
             message,
+
             type
 
         });
@@ -55,6 +56,7 @@ function Home() {
             setToast({
 
                 message: "",
+
                 type: ""
 
             });
@@ -71,7 +73,8 @@ function Home() {
 
 
 
-    const fetchProperties = async () => {
+
+    const fetchProperties = async (filters = {}) => {
 
 
         try {
@@ -83,7 +86,8 @@ function Home() {
 
 
 
-            const data = await getProperties();
+            const data = await getProperties(filters);
+
 
 
             setProperties(data);
@@ -94,16 +98,15 @@ function Home() {
 
 
             console.error(
-
                 "Failed to fetch properties:",
-
                 error
-
             );
 
 
 
             setError(
+
+                error.message ||
 
                 "Unable to load properties. Please try again."
 
@@ -128,6 +131,8 @@ function Home() {
 
 
 
+
+
     useEffect(() => {
 
 
@@ -135,6 +140,49 @@ function Home() {
 
 
     }, []);
+
+
+
+
+
+
+
+
+
+    const handleFilter = (filters) => {
+
+
+        fetchProperties(filters);
+
+
+    };
+
+
+
+
+
+
+
+
+
+    const handlePropertyCreated = () => {
+
+
+        fetchProperties();
+
+
+
+        showToast(
+
+            "Property added successfully",
+
+            "success"
+
+        );
+
+
+    };
+
 
 
 
@@ -182,6 +230,8 @@ function Home() {
 
             showToast(
 
+                error.message ||
+
                 "Failed to delete property",
 
                 "error"
@@ -193,6 +243,7 @@ function Home() {
 
 
     };
+
 
 
 
@@ -215,11 +266,12 @@ function Home() {
 
 
 
+
+
     if (error) {
 
 
         return (
-
 
             <main className="home-page">
 
@@ -236,9 +288,10 @@ function Home() {
 
 
 
+
                     <button
 
-                        onClick={fetchProperties}
+                        onClick={() => fetchProperties()}
 
                     >
 
@@ -258,6 +311,7 @@ function Home() {
 
 
     }
+
 
 
 
@@ -286,6 +340,7 @@ function Home() {
 
 
 
+
             <h1 className="page-title">
 
                 Propify Properties
@@ -299,7 +354,39 @@ function Home() {
 
 
 
+            <PropertyForm
+
+                onPropertyCreated={
+
+                    handlePropertyCreated
+
+                }
+
+            />
+
+
+
+
+
+
+
+
+            <SearchFilter
+
+                onFilter={handleFilter}
+
+            />
+
+
+
+
+
+
+
+
+
             {
+
                 properties.length === 0 ? (
 
 
@@ -307,48 +394,19 @@ function Home() {
                     <div className="empty-state">
 
 
-
-                        <div className="empty-icon">
-
-                            🏠
-
-                        </div>
-
-
-
-
-
                         <h2>
 
-                            No properties yet
+                            No properties found
 
                         </h2>
 
 
 
-
-
                         <p>
 
-                            Start adding properties to build your collection.
+                            Try adjusting your search filters.
 
                         </p>
-
-
-
-
-
-                        <a
-
-                            href="/add-property"
-
-                            className="empty-action"
-
-                        >
-
-                            Add Property
-
-                        </a>
 
 
 
@@ -363,9 +421,10 @@ function Home() {
                     <section className="property-grid">
 
 
-
                         {
+
                             properties.map((property) => (
+
 
 
                                 <PropertyCard
@@ -383,7 +442,9 @@ function Home() {
                                 />
 
 
+
                             ))
+
                         }
 
 
@@ -393,6 +454,7 @@ function Home() {
 
 
                 )
+
             }
 
 

@@ -156,7 +156,7 @@ Pagination
 Admin dashboard
 Deployment with CI/CD
 👨‍💻 Author
-Jamal Adeniyi
+Samuel Ayomide Adeniyi
 Frontend Developer | MERN Stack Developer
 GitHub:
 https://github.com/Jamal4dev⁠�

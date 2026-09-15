@@ -1,9 +1,9 @@
 # Propify
 
-[![React](https://img.shields.io/badge/React-19.3.0-20232A?logo=react&logoColor=61DAFB)](https://react.dev/)
+[![React](https://img.shields.io/badge/React-19.2.8-20232A?logo=react&logoColor=61DAFB)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-8.3.0-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
-[![Express](https://img.shields.io/badge/Express-5.2.1-000000?logo=express&logoColor=white)](https://expressjs.com/)
-[![Mongoose](https://img.shields.io/badge/Mongoose-8.24.4-880000?logo=mongoose&logoColor=white)](https://mongoosejs.com/)
+[![Express](https://img.shields.io/badge/Express-5.1.0-000000?logo=express&logoColor=white)](https://expressjs.com/)
+[![Mongoose](https://img.shields.io/badge/Mongoose-8.18.0-880000?logo=mongoose&logoColor=white)](https://mongoosejs.com/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/atlas)
 
 A full-stack real estate property listing platform built with the MERN stack. Propify gives users a focused marketplace experience for browsing, searching, creating, updating, and removing property listings backed by MongoDB persistence.
@@ -12,44 +12,30 @@ The project solves a common property discovery problem: keeping listing data, se
 
 ## Live Demo
 
-- **Frontend:** `[Netlify URL]`
-- **Backend API:** `https://propify-api-81qi.onrender.com`
-
-These placeholders are intentionally left for the deployed URLs to be added later.
-
-## Screenshots
-
-Replace the following placeholders with screenshots from the deployed application:
-
-| View | Screenshot |
-| --- | --- |
-| Homepage and property listings | ![Propify homepage and property listings](docs/screenshots/homepage.png) |
-| Property details | ![Propify property details page](docs/screenshots/property-details.png) |
-| Add property form | ![Propify add property form](docs/screenshots/add-property.png) |
-| Mobile responsive view | ![Propify mobile responsive layout](docs/screenshots/mobile.png) |
+- **Frontend:** https://propify-property-listing.netlify.app/
+- **Backend API:** https://propify-api-81qi.onrender.com
 
 ## Features
 
 ### Property workflows
 
-- Browse all available property listings.
-- Open a dedicated details page for a property.
-- Create a property with title, price, location, description, and image URL fields.
-- Edit existing property information.
-- Delete properties after confirmation.
-- Persist property records in MongoDB through the Express API.
+- Browse property listings.
+- View property details.
+- Create property listings.
+- Edit properties.
+- Delete properties with a confirmation modal.
+- Persist property records in MongoDB.
 
 ### Search and usability
 
-- Search by title, location, or description.
-- Filter by minimum and maximum price.
-- Sort by newest, lowest price, or highest price.
-- Responsive layouts for desktop, tablet, and mobile screens.
-- Loading, empty, and API error states.
-- Toast feedback for update and delete workflows.
-- Client-side and server-side validation for property data.
-- Image URL preview and fallback handling.
-- Accessible labels, navigation states, confirmation dialogs, and live status feedback.
+- Search properties.
+- Filter by price range.
+- Sort listings.
+- Responsive UI.
+- Loading states.
+- Error states.
+- Toast notifications.
+- Form validation.
 
 ## Tech Stack
 
@@ -79,8 +65,8 @@ Replace the following placeholders with screenshots from the deployed applicatio
 
 | Platform | Role |
 | --- | --- |
-| Netlify | Planned frontend hosting target |
-| Render | Planned backend hosting target |
+| Netlify | Deployed frontend |
+| Render | Deployed backend API |
 | MongoDB Atlas | Hosted database |
 
 ## Application Architecture
@@ -89,13 +75,13 @@ Replace the following placeholders with screenshots from the deployed applicatio
 User
   |
   v
-React + Vite frontend
+Netlify React frontend
   |
-  | Axios requests to /api/properties
+  | Axios API requests
   v
-Express REST API
+Render Express API
   |
-  | Mongoose models and validation
+  | Mongoose
   v
 MongoDB Atlas
 ```
@@ -196,6 +182,20 @@ VITE_API_URL=http://localhost:5000/api
 
 `CORS_ORIGIN` accepts a comma-separated list of allowed frontend origins when more than one deployment origin is required.
 
+Production configuration:
+
+Frontend environment variable:
+
+```env
+VITE_API_URL=https://propify-api-81qi.onrender.com/api
+```
+
+Backend production environment:
+
+```env
+CORS_ORIGIN=https://propify-property-listing.netlify.app
+```
+
 > Never commit `.env` files or database credentials. Environment files are ignored by Git. Store production secrets in the Render, Netlify, or other deployment platform environment-variable dashboards.
 
 ## Running Locally
@@ -279,7 +279,7 @@ Property records contain these fields:
 
 ## Quality Checks
 
-The current project has been validated with:
+Verified:
 
 ```bash
 cd client
@@ -287,9 +287,19 @@ npm run lint
 npm run build
 ```
 
-A manual Playwright browser validation was also performed against the running frontend and real MongoDB-backed API. It covered property creation, homepage loading, search/filtering, details navigation, editing, deletion, deletion persistence after refresh, mobile navigation, and unknown-route handling.
+A manual Playwright production validation was also performed against the deployed frontend and real MongoDB-backed API. Production testing verified:
 
-There is currently no automated Playwright test script or test suite committed in the repository.
+- Creating properties.
+- Loading listings.
+- Searching and filtering.
+- Viewing details.
+- Updating properties.
+- Deleting properties.
+- Mobile navigation.
+- Error handling.
+- Deployment connection.
+
+There is no automated test suite committed in the repository.
 
 ## Future Improvements
 
@@ -309,9 +319,8 @@ The following are roadmap ideas and are **not currently implemented**:
 **Samuel Ayomide Adeniyi**  
 Frontend Developer | MERN Stack Developer
 
-- GitHub: `[GitHub profile link]`
-- LinkedIn: `[LinkedIn profile link]`
+- GitHub: https://github.com/Jamal4dev
 
 ---
 
-Propify is intended as a portfolio and learning project demonstrating full-stack CRUD workflows, API integration, MongoDB persistence, responsive UI design, and deployment-ready configuration.
+Propify is a deployed MERN stack real estate marketplace demonstrating full-stack development, REST API integration, MongoDB data persistence, responsive frontend engineering, and production deployment.

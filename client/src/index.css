@@ -62,7 +62,7 @@ img { display: block; max-width: 100%; }
 .page-title { margin: 8px 0 0; color: var(--ink); font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2.3rem, 5vw, 4.4rem); line-height: 1.04; letter-spacing: -.05em; }
 .eyebrow { margin: 0 0 12px; color: var(--terracotta-dark); font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
 
-.hero { position: relative; display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr); gap: clamp(44px, 8vw, 120px); align-items: center; min-height: 520px; padding: 48px 0 88px; }
+.hero { position: relative; display: grid; overflow-x: clip; grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr); gap: clamp(44px, 8vw, 120px); align-items: center; min-height: 520px; padding: 48px 0 88px; }
 .hero::before { position: absolute; z-index: -1; top: -76px; right: -10vw; width: 55vw; height: 570px; background: var(--sage); border-radius: 0 0 0 42%; content: ''; opacity: .62; }
 .hero h1 { max-width: 730px; margin: 0; color: var(--ink); font-family: 'Playfair Display', Georgia, serif; font-size: clamp(3.5rem, 7vw, 7.2rem); font-weight: 600; line-height: .98; letter-spacing: -.065em; }
 .hero h1 em { color: var(--terracotta); font-weight: 600; }
